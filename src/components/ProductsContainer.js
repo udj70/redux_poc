@@ -1,7 +1,7 @@
 import React,{useEffect} from 'react';
 import axios from 'axios';
 import {useDispatch,useSelector} from 'react-redux';
-import {fetchProductFailure,fetchProductSuccess,fetchProductRequest} from '../redux/product/productActions'
+import {fetchProductFailure,fetchProductSuccess,fetchProductRequest, paginatePages} from '../redux/product/productActions'
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -12,6 +12,7 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import {Link} from 'react-router-dom'
 import Loading from './Loading';
+import Pagination from '@material-ui/lab/Pagination';
 
 const useStyles = makeStyles({
     root: {
@@ -35,24 +36,40 @@ const useStyles = makeStyles({
 
 const ProductsContainer=()=>{
     const product=useSelector(state=>state.product)
-    const products=product.products
+    const products=product.slicedProducts
     const loading=product.loading
     console.log(products.products)
     const dispatch=useDispatch();
     const fetchProducts=()=>{
             dispatch(fetchProductRequest())
-            axios.get('https://fakestoreapi.com/products')
+            return axios.get('https://fakestoreapi.com/products')
                 .then((response)=>{
                     dispatch(fetchProductSuccess(response.data))
+                    const slice=response.data.slice(0,product.perPage)
+                    
+                    dispatch(paginatePages(0,slice))
+                   
                 })
                 .catch((error)=>{
                     dispatch(fetchProductFailure(error.message))
 
                 })
     }
-    useEffect(()=>fetchProducts(),[])
-
-   
+    useEffect(()=>{
+                    fetchProducts()
+                    },[])
+    const receivedData=(current,offset)=>{
+        const slice=product.products.slice(offset,offset+product.perPage)
+        //console.log(offset," -",offset+product.perPage)
+        dispatch(paginatePages(current,slice))
+        //console.log(slice)
+    }
+    const handleChange=(value)=>{
+        const selectedPage=value-1
+        const offset=selectedPage*product.perPage;
+        receivedData(selectedPage,offset)
+        
+    }
     const classes = useStyles();  
     if(loading){
         return(
@@ -87,6 +104,13 @@ const ProductsContainer=()=>{
                                     </Card>
                             )
                 }
+
+                
+                    <Pagination
+                        count={Math.ceil(product.products.length/product.perPage)}
+                        color="primary" 
+                        onChange={(event,value)=>handleChange(value)}
+                    />  
         </>)
 }
 

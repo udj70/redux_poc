@@ -1,10 +1,13 @@
 import {FETCH_PRODUCT_FAILURE,FETCH_PRODUCT_REQUEST,FETCH_PRODUCT_SUCCESS, 
-    SELECTED_PRODUCT_SUCCESS,SELECTED_PRODUCT_FAILURE,SELECTED_PRODUCT_REQUEST, REMOVE_SELECTED_PRODUCT} from './productActionTypes';
+    SELECTED_PRODUCT_SUCCESS,SELECTED_PRODUCT_FAILURE,SELECTED_PRODUCT_REQUEST, REMOVE_SELECTED_PRODUCT, PAGINATE_PAGES, SET_OFFSET, REMOVE_OFFSET} from './productActionTypes';
 
 const initialProductState={
     loading:false,
     products:[],
-    error:''
+    error:'',
+    perPage:4,
+    currentPage:0,
+    slicedProducts:[]
 }
 const selectedProductState={
     loading:false,
@@ -28,7 +31,14 @@ const productReducer=(state=initialProductState,action)=>{
             return{
                 ...state,
                 error:action.error
-            }    
+            }
+        case PAGINATE_PAGES:
+            return{
+                ...state,
+                currentPage:action.currentPage,
+                slicedProducts:action.slicedProducts
+            }  
+       
         default :return  state    
     }
 }

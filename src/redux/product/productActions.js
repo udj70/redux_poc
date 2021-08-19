@@ -1,5 +1,6 @@
 import {FETCH_PRODUCT_SUCCESS,FETCH_PRODUCT_FAILURE,FETCH_PRODUCT_REQUEST,
-       SELECTED_PRODUCT_FAILURE,SELECTED_PRODUCT_SUCCESS,SELECTED_PRODUCT_REQUEST, REMOVE_SELECTED_PRODUCT} from './productActionTypes';
+       SELECTED_PRODUCT_FAILURE,SELECTED_PRODUCT_SUCCESS,SELECTED_PRODUCT_REQUEST,
+    REMOVE_SELECTED_PRODUCT, PAGINATE_PAGES, SET_OFFSET, REMOVE_OFFSET} from './productActionTypes';
 
 
 export const fetchProductRequest=()=>{
@@ -45,5 +46,13 @@ export const selectedProductFailure=error=>{
 export const  removeSelectedProduct=()=>{
     return{
         type:REMOVE_SELECTED_PRODUCT
+    }
+}
+
+export const paginatePages=(currentPage,slicedProducts)=>{
+    return{
+        type:PAGINATE_PAGES,
+        currentPage:currentPage,
+        slicedProducts:slicedProducts
     }
 }
