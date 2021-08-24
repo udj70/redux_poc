@@ -21,16 +21,19 @@
     
     height:60px;
     font-size:20px;
-    width:80px;
+    width:90px;
     
 
 }
 .link{
     text-decoration: none;
     color:white;
-    position:relative;
-    left:15%;
-    top:15%
+    position:absolute;
+    
+    height:60px;
+    width:90px;
+    text-align:center;
+    padding-top:7px
 }
 
 .nav:hover{

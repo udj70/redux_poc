@@ -1,6 +1,14 @@
-import {Link} from 'react-router-dom';
+import {Link, withRouter} from 'react-router-dom';
+import {useEffect, useState} from 'react';
+import auth from './auth-api';
 import './Menu.css';
-function Menu(){
+import { useDispatch, useSelector } from 'react-redux';
+import userinSession from '../redux/user/userActions';
+const Menu=()=>{
+    const InSession= useSelector(state=>state.user.userinSession)
+    console.log(InSession)
+    useEffect(()=>{},[InSession])
+    const dispatch=useDispatch();
     return(<div className='root'>
 
                     <div className='logo'>
@@ -12,10 +20,35 @@ function Menu(){
                         <Link to='/about' className='link'>
                             About
                         </Link>
-                    </div>    
+                    </div>   
+                    
+                    {!auth.isAuthenticated() && 
+                        (<div className='nav'>
+                            <Link to='/signin' className='link' >
+                                Signin
+                            </Link>
+                        </div>)
+                    }        
+                    {auth.isAuthenticated() && (<div className='nav'>
+                                                
+                                                        <Link to='/' className='link' onClick={()=>{auth.signout();
+                                                                                                    dispatch(userinSession(false))}}>
+                                                            Logout
+                                                        </Link>
+                                                    
+                                                </div>)
+                    }    
+         
+                    <div className='nav'>
+                            <Link to='/allusers' className='link' >
+                                All Users
+                            </Link>
+                        </div>
+                    
+                   
             
 
-            </div>)
+            </div>
 
-}
-export default Menu;
+               )}
+export default withRouter(Menu);

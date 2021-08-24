@@ -19,6 +19,7 @@ const useStyles = makeStyles({
       maxWidth:300 ,
       display:'inline-block',
       margin:2,
+      height:500
     
      
     },
