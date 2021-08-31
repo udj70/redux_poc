@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux"
 const auth={
     isAuthenticated:()=>{
         if(sessionStorage.getItem('token') ){
-            console.log("late")
+           
             return true
         }
         return false
