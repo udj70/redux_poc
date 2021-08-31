@@ -18,8 +18,8 @@ const auth={
 
         })
         .then(response=>response.data)
-        .then(data=>{sessionStorage.setItem('token',data.token)
-                        return data})
+        .then(data=>{if(data.token!=undefined) sessionStorage.setItem('token',data.token)
+                    return data})
         .catch((error)=>{
             console.log(error.message)
         })
