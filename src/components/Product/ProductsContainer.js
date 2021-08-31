@@ -1,17 +1,17 @@
 import React,{useEffect} from 'react';
 import axios from 'axios';
 import {useDispatch,useSelector} from 'react-redux';
-import {fetchProductFailure,fetchProductSuccess,fetchProductRequest, paginatePages} from '../redux/product/productActions'
+import {fetchProductFailure,fetchProductSuccess,fetchProductRequest, paginatePages} from '../../redux/product/productActions'
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
-import CardActions from '@material-ui/core/CardActions';
+//import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
-import Button from '@material-ui/core/Button';
+//import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import {Link} from 'react-router-dom'
-import Loading from './Loading';
+import Loading from '../Loading';
 import Pagination from '@material-ui/lab/Pagination';
 
 const useStyles = makeStyles({
@@ -57,7 +57,7 @@ const ProductsContainer=()=>{
                 })
     }
     useEffect(()=>{
-                    fetchProducts()
+                    if(product.products.length==0) fetchProducts()
                     },[])
     const receivedData=(current,offset)=>{
         const slice=product.products.slice(offset,offset+product.perPage)
@@ -78,8 +78,8 @@ const ProductsContainer=()=>{
                             alignItems:'center',
                             justifyContent:'center'
                         }}>
-                loading... 
-               </div> 
+                    <Loading/>
+            </div> 
                     )          
     }
     return( <>

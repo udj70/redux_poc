@@ -1,14 +1,13 @@
 import {Link, withRouter} from 'react-router-dom';
-import {useEffect, useState} from 'react';
-import auth from './auth-api';
+//import {useEffect, useState} from 'react';
+import auth from '../Auth/auth-api';
 import './Menu.css';
-import { useDispatch, useSelector } from 'react-redux';
-import userinSession from '../redux/user/userActions';
+//import { useDispatch, useSelector } from 'react-redux';
+//import userinSession from '../../redux/user/userActions';
 const Menu=()=>{
-    const InSession= useSelector(state=>state.user.userinSession)
-    console.log(InSession)
-    useEffect(()=>{},[InSession])
-    const dispatch=useDispatch();
+    //const InSession= useSelector(state=>state.user.userinSession)
+    //useEffect(()=>{},[InSession])
+    //const dispatch=useDispatch();
     return(<div className='root'>
 
                     <div className='logo'>
@@ -31,8 +30,7 @@ const Menu=()=>{
                     }        
                     {auth.isAuthenticated() && (<div className='nav'>
                                                 
-                                                        <Link to='/' className='link' onClick={()=>{auth.signout();
-                                                                                                    dispatch(userinSession(false))}}>
+                                                        <Link to='/' className='link' onClick={()=>auth.signout()}>
                                                             Logout
                                                         </Link>
                                                     

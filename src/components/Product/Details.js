@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import axios from 'axios';
 import {useParams} from 'react-router-dom';
-import { selectedProductFailure, selectedProductSuccess, selectedProductRequest, removeSelectedProduct } from "../redux/product/productActions";
+import { selectedProductFailure, selectedProductSuccess, selectedProductRequest, removeSelectedProduct } from "../../redux/product/productActions";
 import { useEffect } from "react";
 
 import { makeStyles} from '@material-ui/core/styles';
@@ -12,6 +12,7 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import Loading from "../Loading";
 
 const useStyles = makeStyles({
     root: {
@@ -70,7 +71,7 @@ const Details=()=>{
                             alignItems:'center',
                             justifyContent:'center'
                         }}>
-                loading...
+                    <Loading/>
                </div> 
                     )          
     }

@@ -10,6 +10,7 @@ import Typography from '@material-ui/core/Typography';
 import ArrowForward from '@material-ui/icons/ArrowForward';
 import Person from '@material-ui/icons/Person';
 import {Link} from 'react-router-dom';
+import Loading from '../Loading'
 const useStyles=makeStyles({
     root:{} ,
     title: {
@@ -20,14 +21,25 @@ const useStyles=makeStyles({
 })
 function Users(){
     const [users,setUsers]=useState([])
+    const [load,setLoad]=useState(false)
     const fetchUsers=()=>{
         axios.get('https://fakestoreapi.com/users')
             .then((response)=>response.data)
-            .then((data)=>setUsers(data))
+            .then((data)=>{setUsers(data);setLoad(true)})
             .catch(error=>console.log(error.message))
     }
     useEffect(()=>fetchUsers(),[])
     const classes=useStyles();
+    if(!load){
+        return(
+            <div style={{position:'absolute',left: '50%', top: '50%',
+                            alignItems:'center',
+                            justifyContent:'center'
+                        }}>
+                    <Loading/>
+            </div> 
+                    )          
+    }
     return(
         <Paper className={classes.root} elevation={4}>
                 <Typography type="title" className={classes.title}>

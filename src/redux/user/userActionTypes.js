@@ -1,3 +1,0 @@
-const USER_IN_SESSION='USER_IN_SESSION';
-
-export default USER_IN_SESSION;

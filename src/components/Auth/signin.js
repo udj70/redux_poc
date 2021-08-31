@@ -9,6 +9,7 @@ import {CardContent, CardActions} from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
 import Icon from '@material-ui/core/Icon';
 import Button from '@material-ui/core/Button';
+import Loading from '../Loading';
 const useStyles = makeStyles({
     card: {
         maxWidth: 600,
@@ -63,7 +64,7 @@ function Signin(props){
                             alignItems:'center',
                             justifyContent:'center'
                         }}>
-                loading... 
+                <Loading/>
                </div> 
                     )          
     }

@@ -1,11 +1,11 @@
-import ProductsContainer from './ProductsContainer';
+import ProductsContainer from './Product/ProductsContainer';
 import {BrowserRouter,Route} from 'react-router-dom';
-import Menu from './Menu';
-import Details from './Details';
+import Menu from './Navbar/Menu';
+import Details from './Product/Details';
 import About from './About';
-import Signin from './signin'; 
-import Users from './Users'
-import PrivateRoute from './PrivateRoute';
+import Signin from './Auth/signin'; 
+import Users from './User/Users'
+import PrivateRoute from './Auth/PrivateRoute';
 function MainRouter(){
     return(
         <BrowserRouter>
