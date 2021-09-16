@@ -1,7 +1,8 @@
 import { useDispatch, useSelector } from "react-redux";
 import axios from 'axios';
-import {useParams} from 'react-router-dom';
+import {useParams,Link} from 'react-router-dom';
 import { selectedProductFailure, selectedProductSuccess, selectedProductRequest, removeSelectedProduct } from "../../redux/product/productActions";
+import {addToCart} from '../../redux/user/userActions';
 import { useEffect } from "react";
 
 import { makeStyles} from '@material-ui/core/styles';
@@ -13,6 +14,7 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Loading from "../Loading";
+import auth from "../Auth/auth-api";
 
 const useStyles = makeStyles({
     root: {
@@ -37,6 +39,14 @@ const useStyles = makeStyles({
         '&:hover':{
             backgroundColor:'black'
         }
+    },
+    link:{
+        width:'100%',
+        color:'white',
+        margin:'auto',
+        //backgroundColor:'rgb(0,0,0,0.7)',
+        
+        textDecoration:'none'
     }
   });
 
@@ -58,11 +68,14 @@ const Details=()=>{
                  dispatch(selectedProductFailure(error.message))
              })
     }
-    useEffect(()=>{if(id && id!=="") fetchProductDetails(id);
+    useEffect(()=>{if(id && id!=="" ) fetchProductDetails(id);
 
                     return ()=>{
                         dispatch(removeSelectedProduct())
                     }},[])
+    const handleChange=(event)=>{
+        dispatch(addToCart(id,product.price))
+    }                
     const classes=useStyles();
     
     if(loading){
@@ -104,16 +117,30 @@ const Details=()=>{
                                                 
                             </CardContent>
                     </CardActionArea>
-                    <CardActions>
+                    {!auth.isAuthenticated() && (<CardActions>
+                        <Button size="large" color="primary" className={classes.button}>
+                            <Link to={{
+                                        pathname: '/signin',
+                                        state: {from: '/product/'+id}
+                                    }} className={classes.link}>
+                                 Sign in and order now
+                            </Link>
+                        </Button>    
+        
+                            
+                        </CardActions>)
+                    }              
+                    {auth.isAuthenticated() && (<CardActions>
                             <Button size="large" color="primary" className={classes.button}>
                                     Buy Now
                             </Button>
         
-                            <Button size="large" color="primary" className={classes.button}>
+                            <Button size="large" color="primary" className={classes.button} onClick={handleChange}>
                                     Add to Cart
                             </Button>
 
-                    </CardActions>
+                        </CardActions>)
+                    }                   
                 </Card>
                             
 

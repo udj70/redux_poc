@@ -73,7 +73,7 @@ function Signin(props){
     //console.log(window.history.state.state.from)
     const classes=useStyles();
     if(redirectToReffferer){
-        const from=(window.history.state.state!==undefined)?window.history.state.state.from.pathname:'/'
+        const from=(window.history.state.state!==undefined)?(window.history.state.state.from.pathname!==undefined?window.history.state.state.from.pathname:window.history.state.state.from):'/'
         return(<Redirect to={from}/>)
     }
     if(loading){
