@@ -1,4 +1,4 @@
-import { HistorySharp } from '@material-ui/icons';
+
 import { useSelector, useDispatch } from 'react-redux';
 import {Link, withRouter} from 'react-router-dom';
 import { deleteCart } from '../../redux/user/userActions';
@@ -52,6 +52,12 @@ const Menu=({match,location,history})=>{
                     <div className='nav'>
                             <Link to='/allusers' className='link' >
                                 All Users
+                            </Link>
+                    </div>
+
+                    <div className='nav'>
+                            <Link to='/search' className='link' >
+                                Search
                             </Link>
                     </div>
 

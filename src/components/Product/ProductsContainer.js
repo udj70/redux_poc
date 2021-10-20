@@ -19,14 +19,13 @@ const useStyles = makeStyles({
       maxWidth:300 ,
       display:'inline-block',
       margin:2,
-      height:500
+      height:500,
     
      
     },
     media:{
-        maxWidth:160,
-        margin:'auto',
-        overflow:'hidden',
+        maxWidth:240,
+        margin:'auto'
 
     },
     link:{

@@ -7,6 +7,7 @@ import Signin from './Auth/signin';
 import Users from './User/Users'
 import PrivateRoute from './Auth/PrivateRoute';
 import Cart from './User/Cart';
+import Search from './Product/Search';
 function MainRouter(){
     return(
         <BrowserRouter>
@@ -17,7 +18,7 @@ function MainRouter(){
             <Route exact path="/signin" component={Signin}/>
             <PrivateRoute exact path='/user/cart' component={Cart}/>
             <PrivateRoute exact path="/allusers" component={Users}/>
-
+            <Route exact path="/search" component={Search}/>
         </BrowserRouter>
     )
 }

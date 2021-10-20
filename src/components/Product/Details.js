@@ -25,7 +25,7 @@ const useStyles = makeStyles({
       left:'12%',
     },
     media:{
-        maxWidth:180,
+        maxWidth:240,
         margin:'auto'
     },
     action:{
@@ -109,7 +109,7 @@ const Details=()=>{
                                     {product.description}
                                 </Typography>
                                 <Typography variant="h6" color="textSecondary" component="p">
-                                    <b>Price</b> - {product.price}
+                                    <b>Price</b> - ${product.price}
                                 </Typography>
                                 <Typography variant="h6" color="textSecondary" component="p">
                                     <b>Category</b> - {product.category}
